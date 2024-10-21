@@ -1,0 +1,29 @@
+{
+	"name": "@rspress/abbreviate-tooltip",
+	"version": "0.1.0",
+	"private": false,
+	"files": ["dist"],
+	"author": "Thanh Nguyen",
+	"main": "./dist/esm/index.mjs",
+	"module": "./dist/esm/index.mjs",
+	"types": "./dist/esm/index.d.ts",
+	"scripts": {
+		"build": "rslib build",
+		"public": "npm run build && npm publish",
+		"lint": "pnpm biome check --write"
+	},
+	"dependencies": {
+		"@rspress/shared": "^1.34.1",
+		"lodash": "^4.17.21",
+		"rspress-plugin-devkit": "^0.3.0"
+	},
+	"devDependencies": {
+		"@icondo/rslib": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@types/lodash": "^4.17.9",
+		"@types/mdast": "^4.0.4",
+		"@types/node": "^22.7.6",
+		"mdast": "^3.0.0",
+		"unified": "^11.0.5"
+	}
+}
