@@ -3,7 +3,7 @@
 And it will be rendered as:
 
 <div align="center">
-  <img src="./image.png" alt="sample" width="400" height="300" />
+  <img src="./image.png" alt="sample" width="400"/>
 </div>
 
 ## Usage
