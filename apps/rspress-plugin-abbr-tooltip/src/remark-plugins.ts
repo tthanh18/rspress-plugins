@@ -1,5 +1,14 @@
-import {Paragraph, PhrasingContent, Root, Text} from "mdast";
-import {Plugin} from "unified";
+import type {
+	List,
+	Paragraph,
+	PhrasingContent,
+	Root,
+	Table,
+	TableCell,
+	TableRow,
+	Text
+} from "mdast";
+import type {Plugin} from "unified";
 import {IPhrasingContent} from ".";
 
 function createElement(title: string, text: string): PhrasingContent {
@@ -40,39 +49,36 @@ function createElement(title: string, text: string): PhrasingContent {
 }
 
 function processTextNode(
-	paragraphNode: Paragraph,
+	paragraphNode: Paragraph | TableCell,
 	textNode: Text,
 	data: IPhrasingContent
 ) {
 	const text = textNode.value;
+	const textParts = text.split(" ");
+	const newNodes: PhrasingContent[] = [];
 
-	Object.entries(data).forEach(([key, value]) => {
-		if (text.includes(key)) {
-			const textParts = text.split(key);
-
-			const newNodes: PhrasingContent[] = [];
-
-			if (textParts[0]) {
-				newNodes.push({
-					type: "text",
-					value: textParts[0]
-				});
-			}
-
-			const tooltipNode = createElement(key, value as string);
+	textParts.forEach((word, index) => {
+		if (data[word]) {
+			const tooltipNode = createElement(word, data[word]);
 			newNodes.push(tooltipNode);
-
-			if (textParts[1]) {
-				newNodes.push({
-					type: "text",
-					value: textParts[1]
-				});
-			}
-
-			const index = paragraphNode.children.indexOf(textNode);
-			paragraphNode.children.splice(index, 1, ...newNodes);
+		} else {
+			newNodes.push({
+				type: "text",
+				value: word
+			});
+		}
+		if (index < textParts.length - 1) {
+			newNodes.push({
+				type: "text",
+				value: " "
+			});
 		}
 	});
+
+	const originalIndex = paragraphNode.children.indexOf(textNode);
+	if (originalIndex !== -1) {
+		paragraphNode.children.splice(originalIndex, 1, ...newNodes);
+	}
 }
 
 function processParagraphNode(
@@ -86,12 +92,24 @@ function processParagraphNode(
 	});
 }
 
-function processListNode(listNode: any, data: any) {
+function processListNode(listNode: List, data: IPhrasingContent) {
 	listNode.children.forEach((listItemNode: any) => {
 		listItemNode.children.forEach((item: any) => {
 			if (item.type === "paragraph") {
 				processParagraphNode(item, data);
 			}
+		});
+	});
+}
+
+function processTableNode(tableNode: Table, data: IPhrasingContent) {
+	tableNode.children.forEach((tableRow: TableRow) => {
+		tableRow.children.forEach((cell: TableCell) => {
+			cell.children.forEach((cellContent: any, index) => {
+				if (cellContent.type === "text") {
+					processTextNode(cell, cellContent, data);
+				}
+			});
 		});
 	});
 }
@@ -107,8 +125,13 @@ function transformer(tree: Root, data: IPhrasingContent) {
 				case "paragraph":
 					processParagraphNode(node, data);
 					break;
+
 				case "list":
 					processListNode(node, data);
+					break;
+
+				case "table":
+					processTableNode(node, data);
 					break;
 			}
 
