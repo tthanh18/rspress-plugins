@@ -8,7 +8,7 @@
 .tooltip .tooltiptext {
 	visibility: hidden;
 	background-color: var(--rp-c-bg);
-	border: 1px solid var(--rp-c-text-1);
+	border: 1px solid var(--rp-c-brand-tint);
 	color: var(--rp-c-brand);
 	text-align: center;
 	z-index: 1;
@@ -28,7 +28,7 @@
 		content: "";
 		border-style: solid;
 		border-width: 5px;
-		border-color: var(--rp-custom-block-info) transparent transparent
+		border-color: var(--rp-c-brand-tint) transparent transparent
 			transparent;
 		margin-left: -5px;
 		position: absolute;
