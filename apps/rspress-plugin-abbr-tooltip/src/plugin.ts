@@ -2,7 +2,7 @@ import {RspressPlugin} from "@rspress/shared";
 import {PresetConfigMutator} from "rspress-plugin-devkit";
 import {remarkPluginAbb} from "./remark-plugins";
 import path from "node:path";
-// import "../abbreviate.css";
+import "../abbreviate.css";
 
 export type IPhrasingContent = Record<string, string>;
 export type IPatternMatcher = {

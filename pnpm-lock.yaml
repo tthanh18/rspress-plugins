@@ -70,6 +70,46 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5
 
+  apps/rspress-plugin-abbr-tooltip:
+    dependencies:
+      '@rspress/shared':
+        specifier: ^1.34.1
+        version: 1.34.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      micromatch:
+        specifier: ^4.0.8
+        version: 4.0.8
+      rspress-plugin-devkit:
+        specifier: ^0.3.0
+        version: 0.3.0(rspress@1.34.1)
+    devDependencies:
+      '@icondo/rslib':
+        specifier: workspace:*
+        version: link:../../packages/rslib-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/lodash':
+        specifier: ^4.17.9
+        version: 4.17.10
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
+      '@types/micromatch':
+        specifier: ^4.0.9
+        version: 4.0.9
+      '@types/node':
+        specifier: ^22.7.6
+        version: 22.7.6
+      mdast:
+        specifier: ^3.0.0
+        version: 3.0.0
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
+
   packages/biome-config:
     devDependencies:
       '@biomejs/biome':
@@ -755,6 +795,10 @@ packages:
       '@types/estree': 1.0.6
     dev: false
 
+  /@types/braces@3.0.4:
+    resolution: {integrity: sha512-0WR3b8eaISjEW7RpZnclONaLFDf7buaowRHdqLp4vLj54AsSAYWfh3DRbfiYJY9XDxMgx1B4sE1Afw2PGpuHOA==}
+    dev: true
+
   /@types/debug@4.1.12:
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
     dependencies:
@@ -805,6 +849,12 @@ packages:
   /@types/mdx@2.0.13:
     resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
     dev: false
+
+  /@types/micromatch@4.0.9:
+    resolution: {integrity: sha512-7V+8ncr22h4UoYRLnLXSpTxjQrNUXtWHGeMPRJt1nULXI57G9bIcpyrHlmrQ7QK24EyyuXvYcSSWAM8GA9nqCg==}
+    dependencies:
+      '@types/braces': 3.0.4
+    dev: true
 
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
