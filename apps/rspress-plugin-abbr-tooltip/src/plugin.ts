@@ -5,8 +5,15 @@ import path from "node:path";
 // import "../abbreviate.css";
 
 export type IPhrasingContent = Record<string, string>;
+export type IPatternMatcher = {
+	pattern: string | string[];
+	parser: (text: string) => string;
+};
 
-export function pluginAbbreviate(data: IPhrasingContent): RspressPlugin {
+export function pluginAbbreviate(
+	data: IPhrasingContent,
+	matcher?: IPatternMatcher[]
+): RspressPlugin {
 	return {
 		name: "plugin-abbreviate",
 		config(config) {
@@ -14,7 +21,7 @@ export function pluginAbbreviate(data: IPhrasingContent): RspressPlugin {
 		},
 		globalStyles: path.join(__dirname, "./static/css/index.css"),
 		markdown: {
-			remarkPlugins: [[remarkPluginAbb as any, data]]
+			remarkPlugins: [[remarkPluginAbb as any, data, matcher]]
 		}
 	};
 }
